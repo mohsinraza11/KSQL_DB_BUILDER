@@ -11,14 +11,14 @@ const selectElement = document.querySelector('#dropdown');
 $("#builder").queryBuilder({
   filters: [
     {
-      id: "ORDER_ID",
-      label: "ORDER_ID",
+      id: "STOCK_ID",
+      label: "STOCK_ID",
       type: "string",
     },
 
     {
-      id: "PRODUCT_NAME",
-      label: "PRODUCT_NAME",
+      id: "STOCK_NAME",
+      label: "STOCK_NAME",
       type: "string",
     },
 
@@ -37,23 +37,23 @@ $("#builder").queryBuilder({
 
 selectElement.addEventListener('change', (event) => {
   var selected_table = $('#dropdown').find(":selected").val();
-  console.log("change called");
+  console.log("CHANGE OF STREAM");
   console.log(selected_table);
   // if ($("#builder")) {
   //   $("#builder").remove();
   // }
   switch (selected_table) {
-    case "ORDERS": {
+    case "INVOICE": {
       var filters = [
         {
-          id: "ORDER_ID",
-          label: "ORDER_ID",
+          id: "INVOICE_ID",
+          label: "INVOICE_ID",
           type: "string",
         },
 
         {
-          id: "PRODUCT_NAME",
-          label: "PRODUCT_NAME",
+          id: "INVOICE_NAME",
+          label: "INVOICE_NAME",
           type: "string",
         },
 
@@ -63,27 +63,27 @@ selectElement.addEventListener('change', (event) => {
           type: "integer",
         },
         {
-          id: "TOTAL_PRIC",
+          id: "TOTAL_PRICE",
           label: "TOTAL_PRICE",
           type: "integer",
         },
       ];
-      console.log("inside orders");
+      console.log("INSIDE INVOICE");
       $("#builder").queryBuilder('setFilters', true, filters);
       break;
     }
-    case "PRODUCTS": {
-      console.log("inside products");
+    case "STOCK": {
+      console.log("INSIDE STOCK STREAM");
       $("#builder").queryBuilder('setFilters', true, [
         {
-          id: "PRODUCT_ID",
-          label: "PRODUCT_ID",
+          id: "STOCK_ID",
+          label: "STOCK_ID",
           type: "string",
         },
 
         {
-          id: "PRODUCT_NAME",
-          label: "PRODUCT_NAME",
+          id: "STOCK_NAME",
+          label: "STOCK_NAME",
           type: "string",
         },
 
@@ -101,18 +101,18 @@ selectElement.addEventListener('change', (event) => {
       );
       break;
     }
-    case "USERS": {
-      console.log("inside users");
+    case "CUSTOMER": {
+      console.log("INSIDE CUSTOMER");
       $("#builder").queryBuilder('setFilters', true, [
         {
-          id: "USER_ID",
-          label: "USER_ID",
+          id: "CUSTOMER_ID",
+          label: "CUSTOMER_ID",
           type: "string",
         },
 
         {
-          id: "USER_NAME",
-          label: "USER_NAME",
+          id: "CUSTOMER_NAME",
+          label: "CUSTOMER_NAME",
           type: "string",
         },
 
@@ -152,11 +152,11 @@ $(".parse-json").on("click", function () {
 
   $.ajax(settings).done(function (response) {
     for (var i = 1; i < response.length - 1; i++) {
-   //   console.log(response[i].row.columns.length);
+      // console.log(response[i].row.columns.length);
       var tr = `<tr>`
       for (var j = 0; j < response[i].row.columns.length; j++) {
         tr += `<td> ${response[i].row.columns[j]} </td>`;
-     //   console.log(tr);
+    //    console.log(tr);
       }
       tr += `</tr>`
       $("#table").append(tr);
